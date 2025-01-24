@@ -1,0 +1,17 @@
+﻿@using Models.Models
+@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Storage";
+}
+
+<h2>Storage</h2>
+
+@foreach (Product product in Model)
+{
+    <div>
+        <h3>@product.Product_name</h3>
+        <p>@product.Product_price</p>
+        <h4>@product.Count_at_storage</h4>
+    </div>
+}
