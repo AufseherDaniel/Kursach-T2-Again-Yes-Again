@@ -1,4 +1,5 @@
 ﻿using Models.Abstract;
+using Models.Context;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -13,31 +14,45 @@ namespace WebApp.Controllers
     public class StorageController : Controller
     {
         private Iproduct products;
-
         public int max_products = 2;
+
         public StorageController(Iproduct products)
         {
             this.products = products;
         }
 
-
         // GET: Storage
-        public ViewResult Storage(int page = 1)
+        public ViewResult Storage(string supplierName = null, int page = 1)
         {
-            StorageViewModel model = new StorageViewModel
+            var query = products.Products.AsQueryable();
+
+            // Применяем фильтр, если он есть, и если не выбран вариант "Все"
+            if (!string.IsNullOrEmpty(supplierName) && supplierName != "Все")
             {
-                Products = products.Products
-                .OrderBy(product => product.Product_price)
-                .Skip((page - 1) * max_products)
-                .Take(max_products),
+                query = query.Where(p => p.Supplier.Supplier_name.Contains(supplierName));
+            }
+
+            var model = new StorageViewModel
+            {
+                Products = query
+                    .OrderBy(product => product.Product_price)
+                    .Skip((page - 1) * max_products)
+                    .Take(max_products),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = max_products,
-                    TotalItems = products.Products.Count()
-                }
+                    TotalItems = query.Count()
+                },
+                SupplierFilter = supplierName,
+                Suppliers = products.Suppliers.ToList() 
             };
+
             return View(model);
         }
+
     }
+
+
+
 }

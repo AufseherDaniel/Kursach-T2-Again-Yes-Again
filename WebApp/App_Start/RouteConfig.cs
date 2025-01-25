@@ -14,9 +14,9 @@ namespace WebApp
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: null,
-                url: "Page{page}",
-                defaults: new { controller = "Storage", action = "Storage" }
+             name: "StoragePage",
+             url: "Storage/Page{page}",
+             defaults: new { controller = "Storage", action = "Storage", page = 1 }
             );
 
             routes.MapRoute(

@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
@@ -11,15 +14,8 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="@Url.Action("Priemka", "PriemkaMode")">Режим приемки</a>
-    </div>
-
-    <div>
-        <div id="categ" class="col-xs-3"></div>
-        <div class="col-xs-8">
+        <div>
             @RenderBody()
         </div>
-    </div>
 </body>
 </html>

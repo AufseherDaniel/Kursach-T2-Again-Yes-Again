@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Models.Models.Product>
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_PriemkaLay.cshtml";
+}
+
+<div class="panel panel-default>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product_price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Count_at_storage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Expiration_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supplier_id)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product_price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Count_at_storage)
+                    </td>
+                    <td>
+                        @item.Expiration_date.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier_id)
+                    </td>
+                    @*<td>
+                            @using (Html.BeginForm("Delete", "Product", new { id = item.Product_id }, FormMethod.Post))
+                            {
+                                <input type="submit" value="Delete" class="btn btn-default" />
+                            }
+                        </td>*@
+                </tr>
+
+            }
+        </table>
+    </div>
+    <span>
+        <div class="panel-footer d-flex justify-content-start">
+            <div class="mr-2">
+                @Html.ActionLink("Принять товар", "Create", "PriemkaMode", new { @class = "btn btn-default" })
+            </div>
+            <div>
+                <a href="@Url.Action("Storage", "Storage")" class="btn btn-default">Назад к складу</a>
+            </div>
+        </div>
+    </span>
+</div>
+

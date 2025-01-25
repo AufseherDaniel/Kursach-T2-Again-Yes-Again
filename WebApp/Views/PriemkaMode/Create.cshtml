@@ -1,0 +1,66 @@
+﻿@model Models.Models.Product
+
+@{
+    Layout = null;
+    ViewBag.Title = "Приёмка";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Приём</h2>
+
+        @using (Html.BeginForm("Create", "PriemkaMode", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product_name, new { @class = "font-weight-bold" })
+                @Html.TextBoxFor(model => model.Product_name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Product_name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Product_price, new { @class = "font-weight-bold" })
+                @Html.TextBoxFor(model => model.Product_price, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Product_price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Count_at_storage, new { @class = "font-weight-bold" })
+                @Html.TextBoxFor(model => model.Count_at_storage, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Count_at_storage, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Expiration_date, new { @class = "font-weight-bold" })
+                @Html.TextBoxFor(model => model.Expiration_date, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.Expiration_date, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Supplier_id, new { @class = "font-weight-bold" })
+                @Html.TextBoxFor(model => model.Supplier_id, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Supplier_id, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary">Принять</button>
+            </div>
+        }
+
+        <div class="form-group text-center mt-3">
+            <a href="@Url.Action("Priemka", "PriemkaMode")" class="btn btn-secondary">Назад к списку</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

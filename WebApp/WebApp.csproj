@@ -155,6 +155,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\PriemkaModeController.cs" />
     <Compile Include="Controllers\StorageController.cs" />
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\NinjaDependencyResolver.cs" />
@@ -196,6 +197,9 @@
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
     <Content Include="Views\Shared\_Storage.cshtml" />
+    <Content Include="Views\Shared\_PriemkaLay.cshtml" />
+    <Content Include="Views\PriemkaMode\Priemka.cshtml" />
+    <Content Include="Views\PriemkaMode\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

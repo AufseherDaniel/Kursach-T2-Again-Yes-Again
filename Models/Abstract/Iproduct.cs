@@ -10,5 +10,6 @@ namespace Models.Abstract
     public interface Iproduct
     {
         IEnumerable<Product> Products { get; }
+        IEnumerable<Supplier> Suppliers { get; }
     }
 }
