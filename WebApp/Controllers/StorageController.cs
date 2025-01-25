@@ -22,22 +22,29 @@ namespace WebApp.Controllers
         }
 
         // GET: Storage
-        public ViewResult Storage(string supplierName = null, int page = 1)
+        public ActionResult Storage(string supplierName = "Все", string expirationFilter = "Все", int page = 1)
         {
             var query = products.Products.AsQueryable();
 
-            // Применяем фильтр, если он есть, и если не выбран вариант "Все"
-            if (!string.IsNullOrEmpty(supplierName) && supplierName != "Все")
+            // Фильтрация по поставщику
+            if (supplierName != "Все")
             {
-                query = query.Where(p => p.Supplier.Supplier_name.Contains(supplierName));
+                query = query.Where(p => p.Supplier.Supplier_name == supplierName);
             }
 
-            var model = new StorageViewModel
+            // Фильтрация по сроку годности
+            if (expirationFilter == "Заканчивается через неделю")
             {
-                Products = query
-                    .OrderBy(product => product.Product_price)
-                    .Skip((page - 1) * max_products)
-                    .Take(max_products),
+                var weekFromNow = DateTime.Now.AddDays(7);
+                query = query.Where(p => p.Expiration_date <= weekFromNow && p.Expiration_date >= DateTime.Now);
+            }
+
+           
+            var viewModel = new StorageViewModel
+            {
+                Products = query.OrderBy(p => p.Product_price)
+                               .Skip((page - 1) * max_products)
+                               .Take(max_products),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
@@ -45,10 +52,14 @@ namespace WebApp.Controllers
                     TotalItems = query.Count()
                 },
                 SupplierFilter = supplierName,
-                Suppliers = products.Suppliers.ToList() 
+                ExpirationFilter = expirationFilter, // Добавляем новый фильтр
+                Suppliers = products.Products
+                                    .Select(p => p.Supplier)
+                                    .Distinct()
+                                    .ToList() // Инициализация списка поставщиков
             };
 
-            return View(model);
+            return View(viewModel);
         }
 
     }

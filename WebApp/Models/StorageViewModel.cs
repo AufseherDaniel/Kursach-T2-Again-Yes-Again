@@ -11,6 +11,7 @@ namespace WebApp.Models
         public IEnumerable<Product> Products { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public IEnumerable<Supplier> Suppliers { get; set; }
-        public string SupplierFilter { get; set; } 
+        public string SupplierFilter { get; set; }
+        public string ExpirationFilter { get; set; }
     }
 }
