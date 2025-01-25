@@ -33,7 +33,11 @@ namespace UnitTests1
             StorageController controller = new StorageController(mock.Object);
             controller.max_products = 2;
 
-            StorageViewModel result = (StorageViewModel)controller.Storage(2).Model;
+            ActionResult actionResult = controller.Storage("Все", "Все", 2);
+
+            ViewResult viewResult = actionResult as ViewResult;
+
+            StorageViewModel result = (StorageViewModel)viewResult.Model;
 
             List<Product> products = result.Products.ToList();
             Assert.IsTrue(products.Count == 2);
@@ -73,7 +77,11 @@ namespace UnitTests1
             });
             StorageController controller = new StorageController(mock.Object);
             controller.max_products = 2;
-            StorageViewModel result = (StorageViewModel)controller.Storage(2).Model;
+            ActionResult actionResult = controller.Storage("Все", "Все", 2);
+
+            ViewResult viewResult = actionResult as ViewResult;
+
+            StorageViewModel result = (StorageViewModel)viewResult.Model;
             PagingInfo pagingInfo = result.PagingInfo;
             Assert.AreEqual(pagingInfo.CurrentPage, 2);
             Assert.AreEqual(pagingInfo.ItemsPerPage, 2);
