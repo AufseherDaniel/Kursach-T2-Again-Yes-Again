@@ -1,5 +1,5 @@
 ﻿@using Models.Models
-@model IEnumerable<Product>
+@model WebApp.Models.StorageViewModel
 
 @{
     ViewBag.Title = "Storage";
@@ -7,7 +7,7 @@
 
 <h2>Storage</h2>
 
-@foreach (Product product in Model)
+@foreach (var product in Model.Products)
 {
     <div>
         <h3>@product.Product_name</h3>
@@ -15,3 +15,7 @@
         <h4>@product.Count_at_storage</h4>
     </div>
 }
+
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Storage", new { page = x }))
+</div>
