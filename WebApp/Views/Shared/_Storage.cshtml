@@ -1,0 +1,24 @@
+﻿@model Models.Models.Product
+
+<div class="well">
+    <div class="row">
+        <div class="col-xs-10">
+            <h3>
+                <strong>@Model.Product_name</strong>
+            </h3>
+            <h4>
+                <strong>Срок годности: @Model.Expiration_date.ToString("dd/MM/yyyy")</strong>
+            </h4>
+        </div>
+        <div class="col-xs-2">
+            <h3>
+                <strong class="pull-right label label-primary">@Model.Product_price.ToString("# руб")</strong>
+            </h3>
+        </div>
+    </div>
+    <div>
+        <span>
+
+        </span>
+    </div>
+</div>
